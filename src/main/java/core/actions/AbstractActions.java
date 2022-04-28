@@ -1,18 +1,11 @@
 package core.actions;
 
-import core.driver.DriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
-
 public abstract class AbstractActions {
-    WebDriver driver;
 
-    public AbstractActions() {
-        this.driver = DriverManager.getDriver();
-    }
+    public void wait(int timeout) throws InterruptedException {};
 
     public abstract void clickOn(WebElement el);
 

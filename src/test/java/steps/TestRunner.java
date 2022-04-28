@@ -10,4 +10,6 @@ import org.junit.runner.RunWith;
     glue = {"steps"},
     tags = "@test",
     monochrome = true)
-public class TestRunner {}
+public class TestRunner {
+
+}

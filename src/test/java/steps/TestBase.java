@@ -2,6 +2,7 @@ package steps;
 
 import core.driver.DriverManager;
 import core.driver.TargetFactory;
+import core.page.Factory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -13,13 +14,16 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-public abstract class TestBase {
+import java.net.MalformedURLException;
+
+public class TestBase {
 
     private final static Logger LOGGER = LogManager.getLogger("Cucumber");
     SoftAssertions softly = null;
+    ScenarioContext context = ScenarioContext.currentContext();
 
     @Before
-    public void beforeEachScenario(Scenario scenario) {
+    public void beforeEachScenario(Scenario scenario) throws MalformedURLException {
         System.out.println();
         System.out.println("============================================================");
         LOGGER.warn(String.format("** AUTOMATION TEST ***"));
@@ -28,9 +32,11 @@ public abstract class TestBase {
         String scenarioName = scenario.getName();
         LOGGER.info(String.format("Starting test: %s", scenarioName));
         softly = new SoftAssertions();
-        ScenarioContext.currentContext().set("Assertion").with(softly);
+        context.set("Assertion").with(softly);
         WebDriver driver = new TargetFactory().createInstance("android");
         DriverManager.setDriver(driver);
+        Factory factoryInstance = new Factory(DriverManager.getDriver());
+        context.set("factory").with(factoryInstance);
     }
 
     @After()

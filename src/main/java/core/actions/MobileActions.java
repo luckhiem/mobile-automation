@@ -1,9 +1,6 @@
 package core.actions;
 
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,6 +9,16 @@ import java.time.Duration;
 import static io.cucumber.core.exception.ExceptionUtils.printStackTrace;
 
 public class MobileActions extends AbstractActions {
+    WebDriver driver;
+
+    public MobileActions(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    @Override
+    public void wait(int timeout) throws InterruptedException {
+        Thread.sleep(timeout);
+    }
 
     @Override
     public void clickOn(WebElement el) {
