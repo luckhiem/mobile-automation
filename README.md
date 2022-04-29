@@ -178,7 +178,7 @@ assertThat(SearchPage.getAlertMessage).isEqualTo(AlertMessage);
 
 In some concrete cases, using `Soft Assertions` to collects all assertion errors instead of stopping
 at the first one. The instance of `Soft Assertion` always created in before step of each scenario (
-Please check `test.java.steps.TestBase`) and stored
+Please check `test.java.steps.Hook`) and stored
 by `Scenario.currentContext()`. Just call it:
 
 ```
