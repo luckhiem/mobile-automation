@@ -12,7 +12,7 @@ Feature: As an users, I want to add todo
       | todo_1 |
       | todo_2 |
 
-  @kevin
+  @test
   Scenario Outline: Add todo with reminder
     Given I place in the homepage
     When I click on the add button

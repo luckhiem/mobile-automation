@@ -27,7 +27,7 @@ public class MobileActions extends AbstractActions {
 
     @Override
     public WebElement findElement(By element) {
-        waitUntilElementVisible(element, 10);
+        waitUntilElementVisible(element, 30);
         WebElement el = driver.findElement(element);
         return el;
     }

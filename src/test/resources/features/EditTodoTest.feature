@@ -1,28 +1,17 @@
 Feature: As an users, I want to add todo
 
-  @test
+  @test123
   Scenario Outline: Add todo without reminder
     Given I place in the homepage
     When I click on the add button
-    When I input todo with title "<title>"
-    When I submit add the todo
-    Then I should see the todo "<title>" displayed in the list
-    Examples:
-      | title  |
-      | todo_1 |
-      | todo_2 |
-
-  @kevin
-  Scenario Outline: Add todo with reminder
-    Given I place in the homepage
-    When I click on the add button
-    When I input todo with title "<title>"
+    When I add a new todo "<title>"
+    When I click on item "<title>" in list
+    When I input todo with title "<title_update>"
     When I switch on reminder
-    When I input datetime with "<date>" and "<time>" in reminder
     When I submit add the todo
-    Then I should see the todo "<title>" displayed in the list
+    Then I should see the todo "<title_update>" displayed in the list
     Examples:
-      | title  | date          | time     |
-      | todo_1 | 30 April 2022 | 10:00 PM |
-      | todo_2 | today         | 10:00 PM |
+      | title   | title_update   |
+      | To do 1 | To to 1 Update |
+
 

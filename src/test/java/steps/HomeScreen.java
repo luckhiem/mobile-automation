@@ -24,6 +24,12 @@ public class HomeScreen {
     @Then("I should see the todo {string} displayed in the list")
     public void iShouldSeeTheTodoDisplayedInTheList(String value) {
         String title = factory.homePage().getTodoTitle();
+        System.out.println("");
         soft.assertThat(title).containsIgnoringCase(value);
+    }
+
+    @When("I click on item {string} in list")
+    public void iClickOnItemInList(String arg0) throws InterruptedException {
+        factory.homePage().clickOnItemInList();
     }
 }

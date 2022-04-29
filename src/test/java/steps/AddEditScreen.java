@@ -32,4 +32,10 @@ public class AddEditScreen {
                     .inputTime(time);
         }
     }
+
+    @When("I add a new todo {string}")
+    public void iAddANewTodo(String value) {
+        iInputTodoWithTitle(value);
+        iAddTheTodo();
+    }
 }
