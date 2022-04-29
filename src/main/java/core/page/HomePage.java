@@ -13,6 +13,9 @@ public class HomePage extends AbstractPage {
     @AndroidFindBy(accessibility="More options")
     protected WebElement threeDotBtn;
 
+    @AndroidFindBy(id="com.avjindersinghsekhon.minimaltodo:id/toDoListItemTextview")
+    protected WebElement itemInList;
+
     public HomePage(WebDriver driver){
         super(driver);
         this.driver = driver;
@@ -25,6 +28,16 @@ public class HomePage extends AbstractPage {
 
     public HomePage clickIconThreeDot(){
         clickOnWithWait(threeDotBtn);
+        return this;
+    }
+
+    public String getTodoTitle(){
+        String value = getTextFromElement(itemInList);
+        return value;
+    }
+
+    public HomePage waitForHomePageDisplayed(){
+        waitUntilElementVisible(plusBtn, 10);
         return this;
     }
 }

@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(plugin = {"pretty", "json:target/jsonReports/cucumber.json"},
     features = {"target/test-classes/features/"},
     glue = {"steps"},
-    tags = "@test",
     monochrome = true)
 public class TestRunner {
     @BeforeClass

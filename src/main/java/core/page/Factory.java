@@ -12,4 +12,8 @@ public class Factory {
     public HomePage homePage(){
         return new HomePage(driver);
     }
+
+    public AddEditPage addEditPage(){
+        return new AddEditPage(driver);
+    }
 }

@@ -18,7 +18,7 @@ import java.net.MalformedURLException;
 
 public class Hook {
 
-    private final static Logger LOGGER = LogManager.getLogger("Cucumber");
+    public final static Logger LOGGER = LogManager.getLogger("Cucumber");
     SoftAssertions softly = null;
     ScenarioContext context = ScenarioContext.currentContext();
 

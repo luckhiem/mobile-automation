@@ -25,7 +25,6 @@ public class ServerManager {
     }
 
     public static String getAppiumServerAddress() {
-        System.out.println("appiumDriverLocalService " + appiumDriverLocalService.getUrl().toString());
         return appiumDriverLocalService.getUrl().toString();
     }
 
