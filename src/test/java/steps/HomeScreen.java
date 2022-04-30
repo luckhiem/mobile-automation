@@ -43,4 +43,8 @@ public class HomeScreen {
         factory.homePage().clickOnSettingsBtn();
     }
 
+    @And("I click on about button")
+    public void iClickOnAboutButton() {
+        factory.homePage().clickOnAboutBtn();
+    }
 }

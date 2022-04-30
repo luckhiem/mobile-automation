@@ -20,4 +20,8 @@ public class Factory {
     public SettingPage settingPage() {
         return new SettingPage(driver);
     }
+
+    public AboutPage aboutPage() {
+        return new AboutPage(driver);
+    }
 }
