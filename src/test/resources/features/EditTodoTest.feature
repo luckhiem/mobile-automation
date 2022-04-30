@@ -1,6 +1,6 @@
 Feature: As an users, I want to add todo
 
-  @test123
+  @test
   Scenario Outline: Add todo without reminder
     Given I place in the homepage
     When I click on the add button

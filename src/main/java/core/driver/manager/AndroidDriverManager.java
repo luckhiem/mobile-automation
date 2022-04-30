@@ -10,6 +10,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static env.Config.CONFIG;
+
 public class AndroidDriverManager implements IDriver {
     @Override
     public WebDriver createDriver() throws MalformedURLException {
@@ -23,7 +25,7 @@ public class AndroidDriverManager implements IDriver {
         cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12");
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Emulator");
         cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
-        cap.setCapability(MobileCapabilityType.APP, "/Users/khiemluc/Documents/mobile-automation/src/main/resources/app-release.apk");
+        cap.setCapability(MobileCapabilityType.APP, CONFIG.APP_PATH());
         return cap;
     }
 }

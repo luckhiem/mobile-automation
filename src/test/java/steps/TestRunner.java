@@ -9,17 +9,17 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = {"pretty", "json:target/jsonReports/cucumber.json"},
-    features = {"target/test-classes/features/"},
-    glue = {"steps"},
-    monochrome = true)
+        features = {"target/test-classes/features/"},
+        glue = {"steps"},
+        monochrome = true)
 public class TestRunner {
     @BeforeClass
-    public static void startServer(){
+    public static void startServer() {
         ServerManager.startAppiumServer();
     }
 
     @AfterClass
-    public static void stopServer(){
+    public static void stopServer() {
         ServerManager.stopAppiumServer();
     }
 }

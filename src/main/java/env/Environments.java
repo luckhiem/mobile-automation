@@ -8,13 +8,10 @@ import org.aeonbits.owner.Config.Sources;
 @LoadPolicy(LoadType.MERGE)
 @Sources({"system:env",
     "file:~/.credentials.properties",
-    "classpath:env.dev.properties"
+    "classpath:env.properties"
 })
 public interface Environments extends Config {
 
-  @Key("TEST_URL")
-  String TEST_URL();
-
-  @Key("REMOTE_URL")
-  String REMOTE_URL();
+  @Key("APP_PATH")
+  String APP_PATH();
 }
