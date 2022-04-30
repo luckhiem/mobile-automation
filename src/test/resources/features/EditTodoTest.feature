@@ -1,7 +1,7 @@
-Feature: As an users, I want to add todo
+Feature: As an users, I want to edit todo
 
-  @test
-  Scenario Outline: Add todo without reminder
+  @test123
+  Scenario Outline: Edit to do
     Given I place in the homepage
     When I click on the add button
     When I add a new todo "<title>"

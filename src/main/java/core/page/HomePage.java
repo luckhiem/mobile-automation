@@ -17,8 +17,13 @@ public class HomePage extends AbstractPage {
     @AndroidFindBy(id = "com.avjindersinghsekhon.minimaltodo:id/toDoListItemTextview")
     protected WebElement itemInList;
 
-    @AndroidFindBy(uiAutomator = "text(\"To do 1\")")
-    protected WebElement itemInList1;
+    @AndroidFindBy(uiAutomator = "text(\"About\")")
+    protected WebElement aboutBtn;
+
+    @AndroidFindBy(uiAutomator = "text(\"Settings\")")
+    protected WebElement settingBtn;
+
+    protected String itemInListWithName = "text(\"%s\")";
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -35,6 +40,16 @@ public class HomePage extends AbstractPage {
         return this;
     }
 
+    public HomePage clickOnAboutBtn() {
+        clickOnWithWait(aboutBtn);
+        return this;
+    }
+
+    public HomePage clickOnSettingsBtn() {
+        clickOnWithWait(settingBtn);
+        return this;
+    }
+
     public String getTodoTitle() {
         String value = getTextFromElement(itemInList);
         return value;
@@ -45,8 +60,9 @@ public class HomePage extends AbstractPage {
         return this;
     }
 
-    public HomePage clickOnItemInList() {
-        clickOnWithWait(itemInList1);
+    public HomePage clickOnItemInList(String itemName) {
+        WebElement el = findElement(AppiumBy.androidUIAutomator(String.format(itemInListWithName, itemName)));
+        clickOnWithWait(el);
         return this;
     }
 }

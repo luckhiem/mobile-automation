@@ -2,6 +2,7 @@ package steps;
 
 import core.page.Factory;
 import core.utilities.ScenarioContext;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,6 +30,17 @@ public class HomeScreen {
 
     @When("I click on item {string} in list")
     public void iClickOnItemInList(String arg0) {
-        factory.homePage().clickOnItemInList();
+        factory.homePage().clickOnItemInList(arg0);
     }
+
+    @When("I click on setting app")
+    public void iClickOnSettingApp() {
+        factory.homePage().clickIconThreeDot();
+    }
+
+    @And("I click on setting button")
+    public void iClickOnSettingButton() {
+        factory.homePage().clickOnSettingsBtn();
+    }
+
 }

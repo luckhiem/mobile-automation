@@ -15,6 +15,7 @@ public class ServerManager {
     public static void startAppiumServer() {
         AppiumServiceBuilder appiumServiceBuilder = new AppiumServiceBuilder();
         appiumServiceBuilder
+                .withIPAddress("127.0.0.1")
                 .usingAnyFreePort()
                 .withArgument(GeneralServerFlag.BASEPATH, "/wd/hub/")
                 .withArgument(GeneralServerFlag.RELAXED_SECURITY)
