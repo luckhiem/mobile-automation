@@ -1,6 +1,6 @@
 Feature: As an users, I want to edit todo
 
-  @test123
+  @test
   Scenario Outline: Edit to do
     Given I place in the homepage
     When I click on the add button

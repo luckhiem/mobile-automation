@@ -1,6 +1,6 @@
 Feature: As an users, I want to checking about page
 
-  @night_mode
+  @test
   Scenario Outline: Check setting page
     Given I place in the homepage
     When I click on setting app
@@ -12,7 +12,7 @@ Feature: As an users, I want to checking about page
       | on   |
       | off  |
 
-  @about
+  @test
   Scenario: Check setting page
     Given I place in the homepage
     When I click on setting app
