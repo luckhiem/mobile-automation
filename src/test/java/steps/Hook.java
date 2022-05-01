@@ -16,7 +16,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.net.MalformedURLException;
 
-import static core.contansts.Platform.OS;
+import static core.constants.Platform.OS;
 
 public class Hook {
 

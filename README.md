@@ -1,6 +1,6 @@
 # vdc-automation
 
-VDC Automation test framework support for the automation for web UI.
+Mobile Automation test framework support for the automation for web UI.
 
 ### Technical
 
@@ -9,91 +9,89 @@ This framework uses a number of open source projects to work properly:
 * [Cucumber] - BDD style support for testing on Java!
 * [JUnit 4&5] - Test runner tool of Java
 * [Selenium] - Library use for interacting with Web Browser.
-* [WebDriverManager] - Controlling the driver for each browser in the machine
+* [Appium] - Library use for interacting with Mobile App.
 * [Owner] - Handle application configuration via Java properties files
 * [AssertJ] - Fluent assertions for java
 * [Custom Page Factory] - Core custom functional and modified the library to control the test run
   and Page Object Initialization
+
+### Design Pattern
+* Factory Design Pattern
+* Fluent Interface
+* Singleton
+* Page Object Modal
 
 ### Environment
 
 * Java & JDK 11
 * Maven
 * Docker
+* Appium
+* Appium Doctor
 
 ### Installation
 
 Pull the code via git command to your local:
 
 ```sh
-$ git clone https://github.com/luckhiem/vdc-automation.git
+$ git clone https://github.com/luckhiem/mobile-automation.git
 ```
 
 ### Running
 
 #### Local
 
-**For Cucumber Test**
+1. **Checking Appium Environemnt**
 
 ```sh
-$ mvn clean -Dtest="TestRunner" test -Denv=[environment] "-Dcucumber.options=--tags \"[tagName]\"" 
+$ appium-doctor
+```
+
+2. **Config Environment**
+
+Add the `APP_PATH` to file `env.properties`
+
+3. **Running Cucumber Test**
+
+```sh
+$ mvn clean -Dtest="TestRunner" test -Dos=[platform] -Dcucumber.filter.tags=@tag_name 
 ```
 
 Example:
 
 ```sh
-$ mvn clean verify -Dtest="TestRunner" -Denv=local -Dcucumber.options="--tags @test" test
+$ mvn clean verify -Dtest="TestRunner" -Dos=android -Dcucumber.filter.tags=@test
 ```
 
 [tagName] = @ tag name e.g. @test...
 
-| Variable Name | Meaning                                                        | Available Options               |
-|---------------|----------------------------------------------------------------|--------------------------       |
-| env           | The environment that test will be run                          | local, remote                   |
-
-#### Multiple browser
-
-The framework using [Selenium Grid] run inside docker, to running with multiple browser, please
-follow steps below:
-
-1. Start Selenium Grid in docker
-
-```sh
-$ docker compose -f ./docker-compose.yml up -d
-```
-
-2. Run test by input the browser that want to test (Available: `chrome`, `firefox`, `edge`)
-
-```sh
-$ mvn clean verify -Dtest="TestRunner" -Denv=remote -Dbrowser=firefox -Dcucumber.options="--tags @test" test
-```
-
-3. After finish run test, stop the Selenium Grid
-
-```sh
-$ docker compose -f ./docker-compose.yml down
-```
+| Variable Name | Meaning                                                        | Available Options |
+|---------------|----------------------------------------------------------------|-------------------|
+| os            | The environment that test will be run                          | android, ios      |
 
 ### Structure
-
-**MAIN**
-`main.java.page`: contains all **Page Object Classes** of the website
-`main.java.core`: contains all **Utilities Classes**, such as API Helper, Common utility, Database
-Helper, Driver Factory, Driver Utils, Predefine Caps, Selenium Custom Element, Environment
-Configuration...
-`main.java.resources`: contains the **Environment Configuration** files (dev.properties)
-
-**TEST**
-`test.java.steps`: where define **Methods of Cucumber Gherkin
-steps** https://cucumber.io/docs/cucumber/step-definitions/. Define Cucumber hooks - `CustomHook` (
-before, after methods or specific cucumber tags ) & Cucumber Running Class - `TestRunner` with
-JUnit.
-`test.java.resources:` The directory `features` stores all **Test Scenarios**.
-
-**Pom.xml**: It is an XML file that contains information about the project and configuration details
-used by Maven to build the project. It contains default values for most projects (plugins,
-dependencies/libraries, properties, profile, environment variables...)
-
+```
+├── log
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   ├── core
+│   │   │   │   ├── actions               // folder include mobile actions to interact with element
+│   │   │   │   ├── constants             // folder include contents variables to run test
+│   │   │   │   ├── driver
+│   │   │   │   │   └── manager           // folder include mobile driver manager
+│   │   │   │   ├── page                  // folder include page object modal
+│   │   │   │   ├── server                // folder include appium service to running
+│   │   │   │   └── utilities             // folder include utilities method
+│   │   │   └── env
+│   │   └── resources
+│   └── test
+│       ├── java
+│       │   └── steps                     // folder include steps definitions method
+│       └── resources
+│           └── features
+└── pom.xml
+```
 #### How to define a Web/Mobile Element in PageObject Class
 
 Please use this pattern:
@@ -110,13 +108,6 @@ be `public static`
 @FindBy(id = "email")
 public static Textbox Email_Textbox;
 ```
-
-#### Utilities Classes
-
-- **Helpers**: Declaring some helper functions
-- **Factory**: Manage drivers (web) and predefine Capabilities of devices
-- **Element**: Create specific types of interface **Element**
-- **Env**: Handle application configuration via Java properties files
 
 ### Test Case Template
 
@@ -200,22 +191,7 @@ in `steps.TestRunner`
 Use lifecycle `verify` instead of `test` to generate test report in
 directory `target/cucumber-html-reports/`
 The main report is file `overview-steps.html`
-*Example:* Run this command to execute all scenarios which have tag "@regression" and generate the
-test report:
 
-```sh
-clean verify -Denv=dev "-Dcucumber.options=--tags \"@test\""
-```
-
-### CI/CD
-
-To running test in CI/CD process, we will use [Jenkins] and [Selenium Grid] with Selenium Grid
-working as remote machine and every pipeline in [Jenkins] will call the remote machine to run test
-in Selenium Grid
-
-1. Start the Selenium Grid in a machine
-2. Add the [Jenkins] pipeline with the config `REMOTE_URL` in `resources/env.dev.properties`
-3. Run test
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
