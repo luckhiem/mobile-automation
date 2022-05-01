@@ -1,4 +1,4 @@
-# vdc-automation
+# mobile-automation
 
 Mobile Automation test framework support for the automation for web UI.
 
