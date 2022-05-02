@@ -43,13 +43,18 @@ $ git clone https://github.com/luckhiem/mobile-automation.git
 
 #### Local
 
-1. **Checking Appium Environemnt**
+1. **Checking Appium Environment**
 
 ```sh
 $ appium-doctor
 ```
 
-2. **Config Environment**
+2. **Config Emulator**
+   1. Open Android Studio
+   2. Open Device Manager
+   3. Start Emulator
+
+3. **Config Environment**
 
 Add the `APP_PATH` to file `env.properties`
 
