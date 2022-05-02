@@ -1,6 +1,8 @@
 # mobile-automation
 
 Mobile Automation test framework support for the automation for web UI.
+![appium_test](https://user-images.githubusercontent.com/41050460/166257921-98c43e01-4ce3-43f3-8ba3-4ec86edb8bca.gif)
+
 
 ### Technical
 
