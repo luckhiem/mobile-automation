@@ -58,7 +58,7 @@ $ appium-doctor
 
 Add the `APP_PATH` to file `env.properties`
 
-3. **Running Cucumber Test**
+4. **Running Cucumber Test**
 
 ```sh
 $ mvn clean -Dtest="TestRunner" test -Dos=[platform] -Dcucumber.filter.tags=@tag_name 
