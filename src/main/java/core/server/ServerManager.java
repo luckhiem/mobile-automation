@@ -1,18 +1,28 @@
 package core.server;
 
+import core.driver.DriverManager;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 
 public class ServerManager {
+    private static final ThreadLocal<AppiumDriverLocalService> appiumDriverLocalService = new ThreadLocal<>();
+
     private ServerManager() {
     }
 
-    private static AppiumDriverLocalService appiumDriverLocalService;
+    public static AppiumDriverLocalService getAppiumDriverLocalService() {
+        return appiumDriverLocalService.get();
+    }
 
-    public static void startAppiumServer(String port) {
+    public static void setAppiumDriverLocalService(AppiumDriverLocalService service) {
+        ServerManager.appiumDriverLocalService.set(service);
+    }
+
+    public static AppiumDriverLocalService buildAppiumLocalService(String port) {
         AppiumServiceBuilder appiumServiceBuilder = new AppiumServiceBuilder();
         appiumServiceBuilder
                 .withIPAddress("127.0.0.1")
@@ -20,15 +30,14 @@ public class ServerManager {
                 .withArgument(GeneralServerFlag.BASEPATH, "/wd/hub/")
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "debug")
                 .withLogFile(new File("./log/log_" + System.currentTimeMillis()));
-        appiumDriverLocalService = appiumServiceBuilder.build();
-        appiumDriverLocalService.start();
+        return appiumServiceBuilder.build();
     }
 
     public static String getAppiumServerAddress() {
-        return appiumDriverLocalService.getUrl().toString();
+        return getAppiumDriverLocalService().getUrl().toString();
     }
 
     public static void stopAppiumServer() {
-        appiumDriverLocalService.stop();
+        getAppiumDriverLocalService().stop();
     }
 }
