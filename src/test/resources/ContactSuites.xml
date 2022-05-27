@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Contacts Test" configfailurepolicy="continue" parallel="tests" thread-count="3">
+    <test name="test1">
+        <parameter name="deviceName" value="iPhone 12"/>
+        <parameter name="port" value="4726"/>
+        <parameter name="wda" value="8100"/>
+        <classes>
+            <class name="features.ContactsTest">
+                <methods>
+                    <include name="addNewContact1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="test2">
+        <parameter name="deviceName" value="iPhone 13"/>
+        <parameter name="port" value="4727"/>
+        <parameter name="wda" value="8200"/>
+        <classes>
+            <class name="features.ContactsTest">
+                <methods>
+                    <include name="addNewContact"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+

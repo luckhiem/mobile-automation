@@ -12,14 +12,13 @@ public class ServerManager {
 
     private static AppiumDriverLocalService appiumDriverLocalService;
 
-    public static void startAppiumServer() {
+    public static void startAppiumServer(String port) {
         AppiumServiceBuilder appiumServiceBuilder = new AppiumServiceBuilder();
         appiumServiceBuilder
                 .withIPAddress("127.0.0.1")
                 .usingAnyFreePort()
                 .withArgument(GeneralServerFlag.BASEPATH, "/wd/hub/")
-                .withArgument(GeneralServerFlag.RELAXED_SECURITY)
-                .withArgument(GeneralServerFlag.LOG_LEVEL, "warn")
+                .withArgument(GeneralServerFlag.LOG_LEVEL, "debug")
                 .withLogFile(new File("./log/log_" + System.currentTimeMillis()));
         appiumDriverLocalService = appiumServiceBuilder.build();
         appiumDriverLocalService.start();

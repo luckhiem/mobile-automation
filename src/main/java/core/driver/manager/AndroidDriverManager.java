@@ -14,12 +14,12 @@ import static env.Config.CONFIG;
 
 public class AndroidDriverManager implements IDriver {
     @Override
-    public WebDriver createDriver() throws MalformedURLException {
-        return new AndroidDriver(new URL(ServerManager.getAppiumServerAddress()), createCapabilities());
+    public WebDriver createDriver(String deviceName, String wda) throws MalformedURLException {
+        return new AndroidDriver(new URL(ServerManager.getAppiumServerAddress()), createCapabilities(deviceName, wda));
     }
 
     @Override
-    public DesiredCapabilities createCapabilities() {
+    public DesiredCapabilities createCapabilities(String deviceName, String wda) {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12");

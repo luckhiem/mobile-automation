@@ -9,11 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static io.cucumber.core.exception.ExceptionUtils.printStackTrace;
-
 public class MobileActions extends AbstractActions {
     WebDriver driver;
-    public final static Logger LOGGER = LogManager.getLogger("Cucumber");
+    public final static Logger LOGGER = LogManager.getLogger("Mobile Automation");
 
     public MobileActions(WebDriver driver) {
         this.driver = driver;
@@ -45,7 +43,7 @@ public class MobileActions extends AbstractActions {
     @Override
     public void clickOnWithWait(WebElement el) {
         try {
-            waitUntilLocatorIsClickable(el, 10);
+            waitUntilLocatorIsClickable(el, 30);
             el.click();
             LOGGER.info("User clicks On Element with wait: " + el);
         } catch (ElementClickInterceptedException e) {
@@ -67,7 +65,7 @@ public class MobileActions extends AbstractActions {
         try {
             el.clear();
         } catch (ElementNotInteractableException e) {
-            printStackTrace(e);
+            System.out.println(e);
         }
         el.sendKeys(value);
         LOGGER.info("User inputs field with element: " + el + " and value " + value);

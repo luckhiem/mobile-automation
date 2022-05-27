@@ -2,6 +2,6 @@ package core.constants;
 
 public interface Platform {
     String OS = System.getProperty("os") == null
-            ? "Android"
+            ? "IOS"
             : System.getProperty("os");
 }
