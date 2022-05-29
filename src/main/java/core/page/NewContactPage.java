@@ -6,7 +6,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class WelcomePage extends AbstractPage {
+public class NewContactPage extends AbstractPage {
     WebDriver driver;
 
     @iOSXCUITFindBy(iOSNsPredicate = "label == 'Continue' AND name == 'Continue' AND type == 'XCUIElementTypeButton'")
@@ -18,17 +18,17 @@ public class WelcomePage extends AbstractPage {
     @iOSXCUITFindBy(accessibility = "First name")
     protected WebElement firstNameInput;
 
-    public WelcomePage(WebDriver driver) {
+    public NewContactPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
     }
 
-    public WelcomePage clickOnAddButton() throws InterruptedException {
+    public NewContactPage clickOnAddButton() throws InterruptedException {
         clickOnWithWait(addButton);
         return this;
     }
 
-    public WelcomePage inputFirstName() throws InterruptedException {
+    public NewContactPage inputFirstName() throws InterruptedException {
         inputTextBox(firstNameInput, "Kevin");
         return this;
     }
