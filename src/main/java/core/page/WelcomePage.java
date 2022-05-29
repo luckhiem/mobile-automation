@@ -23,12 +23,6 @@ public class WelcomePage extends AbstractPage {
         this.driver = driver;
     }
 
-    public WelcomePage clickOnContinueButton() throws InterruptedException {
-        clickOnWithWait(continueButton);
-        wait(20000);
-        return this;
-    }
-
     public WelcomePage clickOnAddButton() throws InterruptedException {
         clickOnWithWait(addButton);
         return this;
