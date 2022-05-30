@@ -1,6 +1,8 @@
 package core.actions;
 
-import io.appium.java_client.AppiumBy;
+import io.appium.java_client.*;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
@@ -8,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.HashMap;
 
 public class MobileActions extends AbstractActions {
     WebDriver driver;
@@ -116,5 +119,85 @@ public class MobileActions extends AbstractActions {
         LOGGER.info("Get Text with value: " + text);
         return text;
 
+    }
+
+    public void mobileScrollScreenIOS(String dir) {
+        final int ANIMATION_TIME = 200; // ms
+        final HashMap<String, String> scrollObject = new HashMap<String, String>();
+
+        switch (dir.toUpperCase()) {
+            case "DOWN": // from down to up (! differs from mobile:swipe)
+                scrollObject.put("direction", "down");
+                break;
+            case "UP": // from up to down (! differs from mobile:swipe)
+                scrollObject.put("direction", "up");
+                break;
+            case "LEFT": // from left to right (! differs from mobile:swipe)
+                scrollObject.put("direction", "left");
+                break;
+            case "RIGHT": // from right to left (! differs from mobile:swipe)
+                scrollObject.put("direction", "right");
+                break;
+            default:
+                throw new IllegalArgumentException("mobileScrollIOS(): dir: '" + dir + "' NOT supported");
+        }
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("mobile:scroll", scrollObject); // swipe faster then scroll
+            Thread.sleep(ANIMATION_TIME); // always allow swipe action to complete
+        } catch (Exception e) {
+            System.err.println("mobileScrollIOS(): FAILED\n" + e.getMessage());
+            return;
+        }
+    }
+
+    public void swipeScreen(Direction dir) {
+        final int ANIMATION_TIME = 200;
+        final int PRESS_TIME = 200;
+        int edgeBorder = 10;
+        PointOption pointOptionStart, pointOptionEnd;
+        Dimension dims = driver.manage().window().getSize();
+        pointOptionStart = PointOption.point(dims.width / 2, dims.height / 2);
+        switch (dir) {
+            case DOWN:
+                pointOptionEnd = PointOption.point(dims.width / 2, dims.height - edgeBorder);
+                break;
+            case UP:
+                pointOptionEnd = PointOption.point(dims.width / 2, edgeBorder);
+                break;
+            case LEFT:
+                pointOptionEnd = PointOption.point(edgeBorder, dims.height / 2);
+                break;
+            case RIGHT:
+                pointOptionEnd = PointOption.point(dims.width - edgeBorder, dims.height / 2);
+                break;
+            default:
+                throw new IllegalArgumentException("swipeScreen(): dir: '" + dir + "' NOT supported");
+        }
+        try {
+            new TouchAction((PerformsTouchActions) driver)
+                    .press(pointOptionStart)
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
+                    .moveTo(pointOptionEnd)
+                    .release().perform();
+        } catch (Exception e) {
+            System.err.println("swipeScreen(): TouchAction FAILED\n" + e.getMessage());
+            return;
+        }
+        try {
+            Thread.sleep(ANIMATION_TIME);
+        } catch (InterruptedException e) {
+        }
+    }
+
+    public void hideKeyboard() {
+        driver.navigate().back();
+    }
+
+    public enum Direction {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT;
     }
 }
