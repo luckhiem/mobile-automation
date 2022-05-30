@@ -6,6 +6,7 @@ import io.appium.java_client.touch.offset.PointOption;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -121,33 +122,36 @@ public class MobileActions extends AbstractActions {
 
     }
 
-    public void mobileScrollScreenIOS(String dir) {
-        final int ANIMATION_TIME = 200; // ms
-        final HashMap<String, String> scrollObject = new HashMap<String, String>();
-
-        switch (dir.toUpperCase()) {
-            case "DOWN": // from down to up (! differs from mobile:swipe)
+    public void scrollToElement(Direction dir, RemoteWebElement element) {
+        final int ANIMATION_TIME = 200;
+        final HashMap<String, String> scrollObject = new HashMap<>();
+        switch (dir) {
+            case DOWN:
                 scrollObject.put("direction", "down");
+                scrollObject.put("element", element.getId());
                 break;
-            case "UP": // from up to down (! differs from mobile:swipe)
+            case UP:
                 scrollObject.put("direction", "up");
+                scrollObject.put("element", element.getId());
                 break;
-            case "LEFT": // from left to right (! differs from mobile:swipe)
+            case LEFT:
                 scrollObject.put("direction", "left");
+                scrollObject.put("element", element.getId());
                 break;
-            case "RIGHT": // from right to left (! differs from mobile:swipe)
+            case RIGHT:
                 scrollObject.put("direction", "right");
+                scrollObject.put("element", element.getId());
                 break;
             default:
                 throw new IllegalArgumentException("mobileScrollIOS(): dir: '" + dir + "' NOT supported");
         }
         try {
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("mobile:scroll", scrollObject); // swipe faster then scroll
-            Thread.sleep(ANIMATION_TIME); // always allow swipe action to complete
+            js.executeScript("mobile:swipe", scrollObject);
+            LOGGER.info("mobileScrollIOS: " + element.getId());
+            Thread.sleep(ANIMATION_TIME);
         } catch (Exception e) {
             System.err.println("mobileScrollIOS(): FAILED\n" + e.getMessage());
-            return;
         }
     }
 
@@ -188,10 +192,6 @@ public class MobileActions extends AbstractActions {
             Thread.sleep(ANIMATION_TIME);
         } catch (InterruptedException e) {
         }
-    }
-
-    public void hideKeyboard() {
-        driver.navigate().back();
     }
 
     public enum Direction {

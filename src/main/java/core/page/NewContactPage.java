@@ -6,6 +6,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 public class NewContactPage extends AbstractPage {
     WebDriver driver;
@@ -66,7 +67,7 @@ public class NewContactPage extends AbstractPage {
     }
 
     public NewContactPage inputNotes(String value) {
-        swipeScreen(Direction.UP);
+        scrollToElement(Direction.UP, (RemoteWebElement) notesInput);
         inputTextBox(notesInput, value);
         return this;
     }

@@ -8,22 +8,22 @@
         <classes>
             <class name="features.ContactsTest">
                 <methods>
-                    <include name="addNewContact1"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="test2">
-        <parameter name="deviceName" value="iPhone 13"/>
-        <parameter name="port" value="4727"/>
-        <parameter name="wda" value="8200"/>
-        <classes>
-            <class name="features.ContactsTest">
-                <methods>
                     <include name="addNewContact"/>
                 </methods>
             </class>
         </classes>
     </test>
+<!--    <test name="test2">-->
+<!--        <parameter name="deviceName" value="iPhone 13"/>-->
+<!--        <parameter name="port" value="4727"/>-->
+<!--        <parameter name="wda" value="8200"/>-->
+<!--        <classes>-->
+<!--            <class name="features.ContactsTest">-->
+<!--                <methods>-->
+<!--                    <include name="searchAndEditContact"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
 
