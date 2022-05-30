@@ -27,6 +27,7 @@ public class IOSDriverManager implements IDriver {
         cap.setCapability(MobileCapabilityType.APP, "com.apple.MobileAddressBook");
         cap.setCapability(MobileCapabilityType.FULL_RESET, true);
         cap.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, wda);
+        cap.setCapability(IOSMobileCapabilityType.SIMPLE_ISVISIBLE_CHECK, true);
         return cap;
     }
 }

@@ -26,11 +26,17 @@ public class NewContactPage extends AbstractPage {
     @iOSXCUITFindBy(accessibility = "Insert add phone")
     protected WebElement insertPhoneButton;
 
+    @iOSXCUITFindBy(accessibility = "Insert add email")
+    protected WebElement insertEmailButton;
+
     @iOSXCUITFindBy(accessibility = "Done")
     protected WebElement doneButton;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name == \"mobile\"`]")
     protected WebElement phoneInput;
+
+    @iOSXCUITFindBy(iOSNsPredicate = "name == \"home\" AND value == \"Email\"")
+    protected WebElement emailInput;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextView[`label == \"Notes\"`]")
     protected WebElement notesInput;
@@ -60,14 +66,29 @@ public class NewContactPage extends AbstractPage {
         return this;
     }
 
-    public NewContactPage addPhones(String value) {
+    public NewContactPage clickInsertPhone() {
         clickOnWithWait(insertPhoneButton);
+        return this;
+    }
+
+    public NewContactPage clickInsertEmail() {
+        clickOnWithWait(insertEmailButton);
+        return this;
+    }
+
+    public NewContactPage inputPhones(String value) {
         inputTextBox(phoneInput, value);
         return this;
     }
 
+    public NewContactPage inputEmail(String value) {
+        swipeScreen(Direction.DOWN);
+        inputTextBox(emailInput, value);
+        return this;
+    }
+
     public NewContactPage inputNotes(String value) {
-        scrollToElement(Direction.UP, (RemoteWebElement) notesInput);
+        swipeScreen(Direction.UP);
         inputTextBox(notesInput, value);
         return this;
     }

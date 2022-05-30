@@ -6,12 +6,14 @@ import io.appium.java_client.touch.offset.PointOption;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MobileActions extends AbstractActions {
     WebDriver driver;
@@ -120,39 +122,6 @@ public class MobileActions extends AbstractActions {
         LOGGER.info("Get Text with value: " + text);
         return text;
 
-    }
-
-    public void scrollToElement(Direction dir, RemoteWebElement element) {
-        final int ANIMATION_TIME = 200;
-        final HashMap<String, String> scrollObject = new HashMap<>();
-        switch (dir) {
-            case DOWN:
-                scrollObject.put("direction", "down");
-                scrollObject.put("element", element.getId());
-                break;
-            case UP:
-                scrollObject.put("direction", "up");
-                scrollObject.put("element", element.getId());
-                break;
-            case LEFT:
-                scrollObject.put("direction", "left");
-                scrollObject.put("element", element.getId());
-                break;
-            case RIGHT:
-                scrollObject.put("direction", "right");
-                scrollObject.put("element", element.getId());
-                break;
-            default:
-                throw new IllegalArgumentException("mobileScrollIOS(): dir: '" + dir + "' NOT supported");
-        }
-        try {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("mobile:swipe", scrollObject);
-            LOGGER.info("mobileScrollIOS: " + element.getId());
-            Thread.sleep(ANIMATION_TIME);
-        } catch (Exception e) {
-            System.err.println("mobileScrollIOS(): FAILED\n" + e.getMessage());
-        }
     }
 
     public void swipeScreen(Direction dir) {

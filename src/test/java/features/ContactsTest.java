@@ -14,8 +14,11 @@ public class ContactsTest extends BaseTest {
                 .clickOnAddButton()
                 .inputFirstName("Kevin")
                 .inputLastName("Luc")
-                .inputCompany("ShopBack")
-                .addPhones("123456789")
+                .inputCompany("Creditor Watch")
+                .clickInsertPhone()
+                .inputPhones("123456789")
+                .clickInsertEmail()
+                .inputEmail("khiem.luc@gmail.com")
                 .inputNotes("This is test")
                 .clickOnDoneButton();
     }
@@ -23,8 +26,17 @@ public class ContactsTest extends BaseTest {
     @Test
     public void searchAndEditContact() throws InterruptedException {
         ListingContactPage listingContactPage = new ListingContactPage(DriverManager.getDriver());
+        NewContactPage newContactPage = new NewContactPage(DriverManager.getDriver());
         listingContactPage
                 .inputSearchKeyword("John")
-                .clickOnSearchResult("John Appleseed, John-Appleseed@mac.com");
+                .clickOnSearchResult("John Appleseed, John-Appleseed@mac.com")
+                .clickOnEditButton();
+        newContactPage
+                .inputFirstName("Kevin Updated")
+                .inputLastName("Luc")
+                .inputCompany("Creditor Watch")
+                .inputPhones("123456789")
+                .inputNotes("This is test")
+                .clickOnDoneButton();
     }
 }

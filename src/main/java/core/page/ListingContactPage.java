@@ -12,8 +12,8 @@ public class ListingContactPage extends AbstractPage {
     @iOSXCUITFindBy(accessibility = "Search")
     protected WebElement searchInput;
 
-    @iOSXCUITFindBy(accessibility = "John Appleseed, John-Appleseed@mac.com")
-    protected WebElement searchResultItems;
+    @iOSXCUITFindBy(accessibility = "Edit")
+    protected WebElement editButton;
 
     public ListingContactPage(WebDriver driver) {
         super(driver);
@@ -28,7 +28,11 @@ public class ListingContactPage extends AbstractPage {
     public ListingContactPage clickOnSearchResult(String value) throws InterruptedException {
         By element = AppiumBy.accessibilityId(value);
         clickOnWithWait(driver.findElement(element));
-        wait(10000);
+        return this;
+    }
+
+    public ListingContactPage clickOnEditButton() {
+        clickOnWithWait(editButton);
         return this;
     }
 }
