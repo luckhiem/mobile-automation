@@ -24,14 +24,13 @@ public class ContactsTest extends BaseTest {
     }
 
     @Test
-    public void searchAndEditContact() throws InterruptedException {
+    public void searchAndEditContact() throws InterruptedException, NoSuchMethodException{
         ListingContactPage listingContactPage = new ListingContactPage(DriverManager.getDriver());
-        NewContactPage newContactPage = new NewContactPage(DriverManager.getDriver());
         listingContactPage
                 .inputSearchKeyword("John")
                 .clickOnSearchResult("John Appleseed, John-Appleseed@mac.com")
-                .clickOnEditButton();
-        newContactPage
+                .clickOnEditButton()
+                .redirect(NewContactPage.class)
                 .inputFirstName("Kevin Updated")
                 .inputLastName("Luc")
                 .inputCompany("Creditor Watch")
