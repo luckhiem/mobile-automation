@@ -1,7 +1,6 @@
 package core.page;
 
 import core.actions.MobileActions;
-import core.driver.DriverManager;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebDriver;
 
@@ -9,9 +8,13 @@ import java.time.Duration;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 
-public abstract class AbstractPage extends MobileActions {
+public abstract class AbstractPage {
+    WebDriver driver;
+    MobileActions actions;
+
     protected AbstractPage(WebDriver driver) {
-        super(driver);
-        initElements(new AppiumFieldDecorator(DriverManager.getDriver(), Duration.ofSeconds(30)), this);
+        this.driver = driver;
+        initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(30)), this);
+        actions = new MobileActions(driver);
     }
 }

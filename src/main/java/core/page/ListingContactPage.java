@@ -21,18 +21,18 @@ public class ListingContactPage extends AbstractPage {
     }
 
     public ListingContactPage inputSearchKeyword(String value) {
-        inputTextBox(searchInput, value);
+        actions.inputTextBox(searchInput, value);
         return this;
     }
 
     public ListingContactPage clickOnSearchResult(String value) throws InterruptedException {
         By element = AppiumBy.accessibilityId(value);
-        clickOnWithWait(driver.findElement(element));
+        actions.clickOnWithWait(driver.findElement(element));
         return this;
     }
 
     public ListingContactPage clickOnEditButton() {
-        clickOnWithWait(editButton);
+        actions.clickOnWithWait(editButton);
         return this;
     }
 }

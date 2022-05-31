@@ -1,12 +1,9 @@
 package core.page;
 
-import io.appium.java_client.AppiumBy;
-import io.appium.java_client.pagefactory.AndroidFindBy;
+import core.actions.MobileActions;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 
 public class NewContactPage extends AbstractPage {
     WebDriver driver;
@@ -47,55 +44,55 @@ public class NewContactPage extends AbstractPage {
     }
 
     public NewContactPage clickOnAddButton() {
-        clickOnWithWait(addButton);
+        actions.clickOnWithWait(addButton);
         return this;
     }
 
     public NewContactPage inputFirstName(String value) {
-        inputTextBox(firstNameInput, value);
+        actions.inputTextBox(firstNameInput, value);
         return this;
     }
 
     public NewContactPage inputLastName(String value) {
-        inputTextBox(lastNameInput, value);
+        actions.inputTextBox(lastNameInput, value);
         return this;
     }
 
     public NewContactPage inputCompany(String value) {
-        inputTextBox(companyInput, value);
+        actions.inputTextBox(companyInput, value);
         return this;
     }
 
     public NewContactPage clickInsertPhone() {
-        clickOnWithWait(insertPhoneButton);
+        actions.clickOnWithWait(insertPhoneButton);
         return this;
     }
 
     public NewContactPage clickInsertEmail() {
-        clickOnWithWait(insertEmailButton);
+        actions.swipeScreen(MobileActions.Direction.DOWN);
+        actions.clickOnWithWait(insertEmailButton);
         return this;
     }
 
     public NewContactPage inputPhones(String value) {
-        inputTextBox(phoneInput, value);
+        actions.inputTextBox(phoneInput, value);
         return this;
     }
 
     public NewContactPage inputEmail(String value) {
-        swipeScreen(Direction.DOWN);
-        inputTextBox(emailInput, value);
+        actions.inputTextBox(emailInput, value);
         return this;
     }
 
     public NewContactPage inputNotes(String value) {
-        swipeScreen(Direction.UP);
-        inputTextBox(notesInput, value);
+        actions.swipeScreen(MobileActions.Direction.UP);
+        actions.inputTextBox(notesInput, value);
         return this;
     }
 
     public NewContactPage clickOnDoneButton() throws InterruptedException {
-        clickOnWithWait(doneButton);
-        wait(10000);
+        actions.clickOnWithWait(doneButton);
+        actions.wait(10000);
         return this;
     }
 }
